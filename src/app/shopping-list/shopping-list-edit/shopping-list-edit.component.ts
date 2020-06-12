@@ -11,5 +11,4 @@ export class ShoppingListEditComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
