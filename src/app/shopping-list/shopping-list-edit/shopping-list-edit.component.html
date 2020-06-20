@@ -4,19 +4,22 @@
             <div class="row">
                 <div class="col-md-5 form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" class="form-control" id="name"
+                    #nameInput>
                 </div>
                 <div class="col-md-2 form-group">
                     <label for="amount">Amount</label>
-                    <input type="number" class="form-control" id="amount" min="0" max="100">
+                    <input type="number" class="form-control" id="amount" 
+                    min="0" max="100" #amountInput>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn btn-light" type="submit" title="Add Ingredient">
+                    <button class="btn btn-light" type="submit" title="Add Ingredient"
+                    (click)="onAddIngredient(nameInput.value, amountInput.value)">
                         <img src="assets/add-to-cart.png" alt="Add Ingredient" class="img-responsive">
                     </button>
-                    <button class="btn btn-light mx-2" title="Delete Ingredient">
+                    <button class="btn btn-light mx-2" type="button" title="Delete Ingredient">
                         <img src="assets/trash.png" alt="Delete Ingredient" class="img-responsive">
                     </button>
                     <button class="btn btn-light" type="reset" title="Clear Form">

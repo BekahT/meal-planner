@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-md-12 pl-0">
+    <div class="col-md-12">
         <button class="btn btn-light"><img src="assets/add.png" alt="New" class="img-reponsive mr-1">
             New Recipe</button>
         <hr>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12 list-group">           
+    <div class="col-md-12 list-group ml-3">           
         <app-recipe-item *ngFor="let recipeElm of recipes" 
         [recipe]="recipeElm" (selected)="onRecipeSelected(recipeElm)"></app-recipe-item>
     </div>

@@ -2,7 +2,7 @@
     class="list-group-item list-group-item-action d-flex justify-content-between" (click)="onSelected()">
     <div>
         <h4>{{ recipe.name }}</h4>
-        <p class="mb-0">{{ recipe.description }}</p>
+        <p>{{ recipe.description }}</p>
     </div>
     <span>
         <img [src]="recipe.imgPath" [alt]="recipe.name" class="img-responsive">
