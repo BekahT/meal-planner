@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-success mb-4">
-    <a class="navbar-brand" href="#"><img src="assets/recipe-book.png" alt="Recipe Book Icon" class="mr-2">Recipe
+    <a class="navbar-brand"><img src="assets/recipe-book.png" alt="Recipe Book Icon" class="mr-2">Recipe
         Book</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,10 +8,12 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" (click)="onPageChanged('recipes')">Recipes</a>
+                <a class="nav-link" href="#" (click)="onPageChanged('recipes')"
+                [ngClass]="{'active': currentPage==='recipes'}">Recipes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" (click)="onPageChanged('shoppingList')">Shopping List</a>
+                <a class="nav-link" href="#" (click)="onPageChanged('shoppingList')"
+                [ngClass]="{'active': currentPage==='shoppingList'}">Shopping List</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
