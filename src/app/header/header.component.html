@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-success mb-4">
-    <a class="navbar-brand"><img src="assets/recipe-book.png" alt="Recipe Book Icon" class="mr-2">Recipe
-        Book</a>
+    <a class="navbar-brand"><img src="assets/recipe-book.png" alt="Recipe Book Icon" class="mr-2">Meal Planner</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,19 +7,17 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" (click)="onPageChanged('recipes')"
-                [ngClass]="{'active': currentPage==='recipes'}">Recipes</a>
+                <a class="nav-link" routerLink='/recipe-book' routerLinkActive="active">Recipe Book</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" (click)="onPageChanged('shoppingList')"
-                [ngClass]="{'active': currentPage==='shoppingList'}">Shopping List</a>
+                <a class="nav-link" routerLink='/shopping-list' routerLinkActive="active">Shopping List</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Manage</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Save Data</a>
-                    <a class="dropdown-item" href="#">Fetch Data</a>
+                    <a class="dropdown-item">Save Data</a>
+                    <a class="dropdown-item">Fetch Data</a>
                 </div>
             </li>
         </ul>

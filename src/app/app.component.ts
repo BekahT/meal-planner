@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title: string = 'recipe-book';
-  currentPage: string = 'recipes';
-
-  onChange(newPage: string) {
-    this.currentPage = newPage;
-  }
 }
