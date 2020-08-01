@@ -1,10 +1,12 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
 import { Ingredient } from '../shared/ingredient.model';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ShoppingListService {
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
 
   constructor(private _snackBar: MatSnackBar) { } 
 
@@ -20,7 +22,7 @@ export class ShoppingListService {
 
   addIngredient(newIngredient: Ingredient) {
     this.ingredients.push(newIngredient);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.next(this.ingredients.slice());
     // Show success notification
     const config = new MatSnackBarConfig();
     config.panelClass = ['snackbar-notification'];
@@ -30,7 +32,7 @@ export class ShoppingListService {
 
   addIngredients(newIngredients: Ingredient[]){
     this.ingredients.push(...newIngredients);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.next(this.ingredients.slice());
     // Show success notification
     const config = new MatSnackBarConfig();
     config.panelClass = ['snackbar-notification'];
