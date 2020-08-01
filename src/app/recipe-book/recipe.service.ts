@@ -70,6 +70,10 @@ export class RecipeService {
     return this.recipes.slice(); // return new array that is copy of the private one
   }
 
+  getRecipe(index: number) {
+    return this.recipes[index];
+  }
+
   addToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
   }
