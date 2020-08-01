@@ -18,7 +18,8 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" (click)="onAddToShoppingList()"><img src="assets/add-to-cart.png" alt="Add" class="img-responsive mr-1">
                     Add to Shopping List</a>
-                <a class="dropdown-item"><img src="assets/pencil.png" alt="Edit" class="img-responsive mr-1">
+                <a class="dropdown-item" routerLink="edit">
+                    <img src="assets/pencil.png" alt="Edit" class="img-responsive mr-1">
                     Edit {{ recipe.name }}</a>
                 <a class="dropdown-item"><img src="assets/trash.png" alt="Delete" class="img-responsive mr-1">
                     Delete {{ recipe.name }}</a>
