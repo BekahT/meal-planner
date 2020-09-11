@@ -7,6 +7,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 @Injectable()
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   constructor(private _snackBar: MatSnackBar) { } 
 
@@ -18,6 +19,10 @@ export class ShoppingListService {
 
   getIngredients() {
     return this.ingredients.slice(); // return new array that is copy of the private one
+  }
+
+  getIngredient(index: number) {
+    return this.ingredients[index];
   }
 
   addIngredient(newIngredient: Ingredient) {
@@ -38,5 +43,15 @@ export class ShoppingListService {
     config.panelClass = ['snackbar-notification'];
     config.duration = 3000;
     this._snackBar.open('Ingredients have been added to the Shopping List', 'Dismiss', config);
+  }
+  
+  updateIngredient(index: number, newIngredient: Ingredient) {
+    this.ingredients[index] = newIngredient;
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 }
