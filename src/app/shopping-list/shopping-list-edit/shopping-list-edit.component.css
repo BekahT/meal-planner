@@ -1,7 +1,0 @@
-button > img {
-    height: 32px;
-}
-
-.form-group .ng-touched.ng-invalid {
-    border: 1px solid red;
-  }

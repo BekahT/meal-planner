@@ -1,3 +1,75 @@
-<h3 *ngIf="!editMode">New Recipe</h3>
-
-<h3 *ngIf="editMode">Edit Recipe</h3>
+<div class="row">
+    <div class="col-md-12">
+        <h2 *ngIf="!editMode">New Recipe</h2>
+        <h2 *ngIf="editMode">Edit Recipe</h2>
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <button class="btn btn-light mr-2" type="submit" title="Save Recipe" [disabled]="!recipeForm.valid">
+                        <img src="assets/save.png" alt="Save Recipe" class="img-responsive mr-2">Save
+                    </button>
+                    <button class="btn btn-light" type="button" title="Cancel">
+                        <img src="assets/undo.png" alt="Cancel" class="img-responsive mr-2">Cancel
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                        <span class="text-muted"
+                            *ngIf="!recipeForm.get('name').valid && recipeForm.get('name').touched && recipeForm.get('name').errors">
+                            <span *ngIf="recipeForm.get('name').errors['required']">Please enter a recipe name.</span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                        <textarea class="form-control" name="description" id="description" formControlName="description"
+                            rows="5"></textarea>
+                        <span class="text-muted"
+                            *ngIf="!recipeForm.get('description').valid && recipeForm.get('description').touched && recipeForm.get('description').errors">
+                            <span *ngIf="recipeForm.get('description').errors['required']">Please enter a recipe
+                                description.</span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Image URL</label>
+                        <input type="text" class="form-control" id="imgPath" formControlName="imgPath">
+                        <span class="text-muted"
+                            *ngIf="!recipeForm.get('imgPath').valid && recipeForm.get('imgPath').touched && recipeForm.get('imgPath').errors">
+                            <span *ngIf="recipeForm.get('imgPath').errors['required']">Please provide a URL with a
+                                recipe image.</span>
+                        </span>
+                        <img src="" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" formArrayName="ingredients">
+                    <h3>Ingredients</h3>
+                    <div class="row mb-2" *ngFor="let ingredientCtrl of controls; let i = index" [formGroupName]="i">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" class="form-control" formControlName="amount" min="1" max="100">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-light mx-2" type="button" title="Delete Ingredient">
+                                <img src="assets/delete.png" alt="Delete Ingredient" class="img-responsive">
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-light" (click)="onAddIngredient()"> 
+                                <img src="assets/add.png" alt="New Ingredients" class="img-reponsive mr-2">Add Ingredient</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

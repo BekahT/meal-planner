@@ -15,14 +15,11 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItemIndex: number;
   editedItem: Ingredient;
-  
+
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
-    this.editIngredientForm = new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'amount': new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)])
-    });
+    this.initForm();
 
     this.subscription = this.shoppingListService.startedEditing.subscribe(
       (index: number) => {
@@ -37,7 +34,14 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSubmit() {    
+  private initForm() {
+    this.editIngredientForm = new FormGroup({
+      'name': new FormControl(null, Validators.required),
+      'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/), Validators.min(1), Validators.max(100)])
+    });
+  }
+
+  onSubmit() {
     const newIngredient = new Ingredient(this.editIngredientForm.value.name, this.editIngredientForm.value.amount);
     if (this.editMode) {
       this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
