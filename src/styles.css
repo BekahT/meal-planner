@@ -3,6 +3,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-button > img { height: 24px; }
+button > img, a > img { height: 24px; }
 
 .form-control.ng-touched.ng-invalid { border: 1px solid red; }

@@ -14,10 +14,10 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Manage</a>
+                    aria-haspopup="true" aria-expanded="false">Manage Data</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item">Save Data</a>
-                    <a class="dropdown-item">Fetch Data</a>
+                    <a class="dropdown-item" (click)="onSave()"><img src="assets/upload.png" class="img-responsive mr-2">Save Data</a>
+                    <a class="dropdown-item" (click)="onFetch()"><img src="assets/download.png" class="img-responsive mr-2">Fetch Data</a>
                 </div>
             </li>
         </ul>

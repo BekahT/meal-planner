@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  firebase = {
+  firebase: {
     apiKey: "AIzaSyAMQJ7B3pF3IRa5OHcx_xE2wp1FSaZR2Bo",
     authDomain: "qu-meal-planner.firebaseapp.com",
     databaseURL: "https://qu-meal-planner-default-rtdb.firebaseio.com",
