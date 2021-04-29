@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
 import { AngularFireModule } from '@angular/fire';
@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipe-book/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.component';
+import { AuthComponent } from './auth/auth.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.compo
     HeaderComponent,
     RecipeBookComponent,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,13 @@ import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.compo
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

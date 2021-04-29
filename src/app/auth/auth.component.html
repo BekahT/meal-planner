@@ -1,0 +1,25 @@
+<h1 class="d-flex justify-content-center">Log In or Sign Up to use the Meal Planner</h1>
+<div class="d-flex justify-content-center">
+  <div class="spinner-border text-success" role="status" *ngIf="isLoading">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <form class="authForm" [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" formControlName="email"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-control" formControlName="password"/>
+    </div>
+    <div>
+      <button class="btn btn-primary mr-5" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Log In' : 'Sign Up'}}</button>
+      <button class="btn btn-success" type="button" (click)="onSwitchMode()">Switch to {{ isLoginMode ? 'Sign Up' : 'Log In'}}</button>
+    </div>
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="alert alert-danger my-4" role="alert" *ngIf="error">
+    {{ error }}
+  </div>
+</div>
