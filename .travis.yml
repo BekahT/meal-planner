@@ -8,12 +8,23 @@ branches:
   except:
     - gh-pages # Do not ever build off gh-pages branch
 
+stages:
+  - lint
+  - deploy
+
 before_script:
   - npm install -g @angular/cli #install angular CLI
 
-script:
-  - ng lint
-  - ng build --prod --base-href=/meal-planner/
+jobs:
+  include:
+    - stage: lint
+    script: ng lint
+    - stage: deploy
+    script: ng build --prod --base-href=/meal-planner/
+
+# script:
+#   - ng lint
+#   - ng build --prod --base-href=/meal-planner/
 
 after_success:
   - echo "Build SUCCESS"
