@@ -13,18 +13,20 @@ branches:
 
 jobs:
   include:
-    - stage: node
+    - name: node
       language: node_js
       node_js:
         - stable
-    - stage: angular
-    script: npm install -g @angular/cli
-    - stage: lint
-    script: ng lint
-    - stage: deploy
-    script: ng build --prod --base-href=/meal-planner/
+      install:
+        - npm install -g @angular/cli
+    - name: lint
+    script:
+      - ng lint
+    - name: deploy
+    script:
+      - ng build --prod --base-href=/meal-planner/
     deploy:
-      provider: pages
+    - provider: pages
       skip-cleanup: true
       github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
       keep-history: true
