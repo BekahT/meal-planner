@@ -8,19 +8,25 @@ branches:
   except:
     - gh-pages # Do not ever build off gh-pages branch
 
-stages:
-  - lint
-  - deploy
-
-before_script:
-  - npm install -g @angular/cli #install angular CLI
+# before_script:
+#   - npm install -g @angular/cli #install angular CLI
 
 jobs:
   include:
+    - stage: install
+    script: npm install -g @angular/cli
     - stage: lint
     script: ng lint
     - stage: deploy
     script: ng build --prod --base-href=/meal-planner/
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+      keep-history: true
+      on:
+        branch: master
+      local_dir: dist/meal-planner/  # Only copy the /dist/recipe-book contents (Angular > 6)
 
 # script:
 #   - ng lint
@@ -29,15 +35,5 @@ jobs:
 after_success:
   - echo "Build SUCCESS"
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
-  on:
-    branch: master
-  local_dir: dist/meal-planner/  # Only copy the /dist/recipe-book contents (Angular > 6)
-
 after_deploy:
   - echo "Deployed to GH Pages"
-  #- node update-version.js
