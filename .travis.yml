@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - stable
 
+install: npm install - @angular/cli
+
 branches:
   only:
     - master
@@ -10,12 +12,9 @@ branches:
 
 jobs:
   include:
-    - name: install
-      install:
-        - npm install -g @angular/cli
     - name: lint
       script: ng lint
-    - name: deploy
+    - name: deploy to GH Pages
       script: ng build --prod --base-href=/meal-planner/
       deploy:
       - provider: pages
