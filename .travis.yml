@@ -1,54 +1,28 @@
-# language: node_js
-# node_js:
-#   - stable # Use stable version of node
+language: node_js
+node_js:
+  - stable
 
 branches:
   only:
-    - master # Only build master branch
+    - master
   except:
-    - gh-pages # Do not ever build off gh-pages branch
-
-# before_script:
-#   - npm install -g @angular/cli #install angular CLI
+    - gh-pages
 
 jobs:
   include:
-    - name: node
-      language: node_js
-      node_js:
-        - stable
+    - name: install
       install:
         - npm install -g @angular/cli
     - name: lint
-    script:
-      - ng lint
+      script: ng lint
     - name: deploy
-    script:
-      - ng build --prod --base-href=/meal-planner/
-    deploy:
-    - provider: pages
-      skip-cleanup: true
-      github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-      keep-history: true
-      on:
-        branch: master
-      local_dir: dist/meal-planner/  # Only copy the /dist/recipe-book contents (Angular > 6)
-
-# script:
-#   - ng lint
-#   - ng build --prod --base-href=/meal-planner/
-
-# deploy:
-#       provider: pages
-#       skip-cleanup: true
-#       github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-#       keep-history: true
-#       on:
-#         branch: master
-#       local_dir: dist/meal-planner/  # Only copy the /dist/recipe-book contents (Angular > 6)
-
-# after_success:
-#   - echo "Build SUCCESS"
-
-# after_deploy:
-#   - echo "Deployed to GH Pages"
+      script: ng build --prod --base-href=/meal-planner/
+      deploy:
+      - provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        on:
+          branch: master
+        local_dir: dist/meal-planner/
+        after_deploy: echo "Deployed to GH Pages"
