@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     ]},
   { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'recipe-book' }
-]
+];
 
 @NgModule({
   imports: [

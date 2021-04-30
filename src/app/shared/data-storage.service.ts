@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, tap, take, exhaustMap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
 import { Recipe } from '../recipe-book/recipe.model';
 import { RecipeService } from '../recipe-book/recipe.service';
 import { AuthService } from '../auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +19,13 @@ export class DataStorageService {
     private authService: AuthService
   ) { }
 
-  storeRecipes() {
+  storeRecipes(): void {
     const recipes = this.recipesService.getRecipes();
     // Overwrite all recipes with current list
     this.http.put(this.endPointURL, recipes).subscribe();
   }
 
-  fetchRecipes() {
+  fetchRecipes(): Observable<Recipe[]> {
     return this.http
       .get<Recipe[]>(
         this.endPointURL

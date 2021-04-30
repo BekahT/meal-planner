@@ -8,6 +8,7 @@ import {
 import { Recipe } from './recipe.model';
 import { DataStorageService } from '../shared/data-storage.service';
 import { RecipeService } from './recipe.service';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecipesResolverService implements Resolve<Recipe[]> {
@@ -16,7 +17,7 @@ export class RecipesResolverService implements Resolve<Recipe[]> {
     private recipesService: RecipeService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe[] | Observable<Recipe[]> {
     const recipes = this.recipesService.getRecipes();
 
     // Don't overwrite recipes if we already have them

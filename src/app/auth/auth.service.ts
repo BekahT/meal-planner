@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import { throwError, BehaviorSubject, Observable } from 'rxjs';
 
 import { User } from './user.model';
 
@@ -24,9 +24,9 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router
-    ) { }
+  ) { }
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string): Observable<AuthResponseData> {
     return this.http
       .post<AuthResponseData>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAMQJ7B3pF3IRa5OHcx_xE2wp1FSaZR2Bo',
@@ -49,7 +49,7 @@ export class AuthService {
       );
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<AuthResponseData> {
     return this.http
       .post<AuthResponseData>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAMQJ7B3pF3IRa5OHcx_xE2wp1FSaZR2Bo',
@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   // Check local storage for logged in user
-  autoLogin() {
+  autoLogin(): void {
     const userData: {
       email: string,
       id: string,
@@ -94,7 +94,7 @@ export class AuthService {
     }
   }
 
-  logout() {
+  logout(): void {
     this.user.next(null);
     localStorage.removeItem('userData');
     this.router.navigate(['/auth']);
@@ -106,7 +106,7 @@ export class AuthService {
   }
 
   // Logout on token expiration
-  autoLogout(expirationDuration: number) {
+  autoLogout(expirationDuration: number): void {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
@@ -133,17 +133,17 @@ export class AuthService {
       return throwError(errorMessage);
     }
     switch (errorRes.error.error.message) {
-      case 'EMAIL_EXISTS':
-        errorMessage = 'An account already exists for this email address.';
-        break;
-      case 'EMAIL_NOT_FOUND':
-      case 'INVALID_PASSWORD':
-        errorMessage = 'Invalid login credentials.';
-        break;
-      case 'USER_DISABLED':
-      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-        errorMessage = 'This account has been locked or disabled.';
-        break;
+    case 'EMAIL_EXISTS':
+      errorMessage = 'An account already exists for this email address.';
+      break;
+    case 'EMAIL_NOT_FOUND':
+    case 'INVALID_PASSWORD':
+      errorMessage = 'Invalid login credentials.';
+      break;
+    case 'USER_DISABLED':
+    case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+      errorMessage = 'This account has been locked or disabled.';
+      break;
     }
     return throwError(errorMessage);
   }

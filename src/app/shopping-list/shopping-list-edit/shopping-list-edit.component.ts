@@ -37,11 +37,13 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   private initForm() {
     this.editIngredientForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
-      'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/), Validators.min(1), Validators.max(100)])
+      'amount': new FormControl(null,
+        [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/), Validators.min(1), Validators.max(100)]
+      )
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const newIngredient = new Ingredient(this.editIngredientForm.value.name, this.editIngredientForm.value.amount);
     if (this.editMode) {
       this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
@@ -51,17 +53,17 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     this.onReset();
   }
 
-  onReset() {
+  onReset(): void {
     this.editMode = false;
     this.editIngredientForm.reset();
   }
 
-  onDelete() {
+  onDelete(): void {
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
     this.onReset();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

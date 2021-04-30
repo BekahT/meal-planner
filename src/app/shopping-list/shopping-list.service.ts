@@ -14,20 +14,20 @@ export class ShoppingListService {
   constructor(private _snackBar: MatSnackBar) { }
 
   private ingredients: Ingredient[] = [
-    new Ingredient("bread", 2),
-    new Ingredient("egg", 3),
-    new Ingredient("cinnamon", 1)
+    new Ingredient('bread', 2),
+    new Ingredient('egg', 3),
+    new Ingredient('cinnamon', 1)
   ];
 
-  getIngredients() {
+  getIngredients(): Ingredient[] {
     return this.ingredients.slice(); // return new array that is copy of the private one
   }
 
-  getIngredient(index: number) {
+  getIngredient(index: number): Ingredient {
     return this.ingredients[index];
   }
 
-  addIngredient(newIngredient: Ingredient) {
+  addIngredient(newIngredient: Ingredient): void {
     this.ingredients.push(newIngredient);
     this.ingredientsChanged.next(this.ingredients.slice());
     // Show success notification
@@ -37,7 +37,7 @@ export class ShoppingListService {
     this._snackBar.open(newIngredient.name + ' has been added to the Shopping List', 'Dismiss', config);
   }
 
-  addIngredients(newIngredients: Ingredient[]) {
+  addIngredients(newIngredients: Ingredient[]): void {
     this.ingredients.push(...newIngredients);
     this.ingredientsChanged.next(this.ingredients.slice());
     // Show success notification
@@ -47,12 +47,12 @@ export class ShoppingListService {
     this._snackBar.open('Ingredients have been added to the Shopping List', 'Dismiss', config);
   }
 
-  updateIngredient(index: number, newIngredient: Ingredient) {
+  updateIngredient(index: number, newIngredient: Ingredient): void {
     this.ingredients[index] = newIngredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  deleteIngredient(index: number) {
+  deleteIngredient(index: number): void {
     this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice());
   }
