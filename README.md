@@ -1,7 +1,7 @@
 # Meal Planner
 [![Build Status](https://travis-ci.com/BekahT/meal-planner.svg?branch=master)](https://travis-ci.com/BekahT/meal-planner)
 
-Dev: https://bekaht.github.io/meal-planner/
+Staging: https://bekaht.github.io/meal-planner/
 
 Prod: https://qu-meal-planner.web.app/
 
