@@ -28,7 +28,8 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
         this.editedItem = this.shoppingListService.getIngredient(this.editedItemIndex);
         this.editIngredientForm.setValue({
           name: this.editedItem.name,
-          amount: this.editedItem.amount
+          amount: this.editedItem.amount,
+          unit: this.editedItem.unit
         });
       }
     );
@@ -38,13 +39,14 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     this.editIngredientForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
       'amount': new FormControl(null,
-        [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/), Validators.min(1), Validators.max(100)]
-      )
+        [Validators.required, Validators.min(.1), Validators.max(100)]),
+      'unit': new FormControl(null, Validators.required)
     });
   }
 
   onSubmit(): void {
-    const newIngredient = new Ingredient(this.editIngredientForm.value.name, this.editIngredientForm.value.amount);
+    const newIngredient = new Ingredient(
+      this.editIngredientForm.value.name, this.editIngredientForm.value.amount, this.editIngredientForm.value.unit);
     if (this.editMode) {
       this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
     } else {

@@ -4,7 +4,7 @@
         <hr>
         <div class="list-group">
             <a *ngFor="let ingredient of ingredients; let i = index" (click)="onEditItem(i)"
-            class="list-group-item list-group-item-action">{{ ingredient.name }} ({{ ingredient.amount }})</a>
+            class="list-group-item list-group-item-action"> {{ ingredient.amount }} {{ ingredient.unit }} - {{ ingredient.name }}</a>
         </div>
-    </div>    
+    </div>
 </div>

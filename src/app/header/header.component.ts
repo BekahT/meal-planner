@@ -11,6 +11,7 @@ import { DataStorageService } from '../shared/data-storage.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean = false;
   private userSub: Subscription;
+  fetchData: boolean = true;
 
   constructor(
     private dataStorageService: DataStorageService,
@@ -21,6 +22,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
     });
+  }
+
+  onRecipeBook(): void {
+    // Only fetch recipes on the first navigation
+    if (this.fetchData) {
+      this.fetchData = false;
+      this.onFetch();
+    }
   }
 
   onSave(): void {

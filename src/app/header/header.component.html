@@ -10,7 +10,7 @@
         <a class="nav-link" routerLink='/auth' routerLinkActive="active">Login or Sign Up</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link" routerLink='/recipe-book' routerLinkActive="active">Recipe Book</a>
+        <a class="nav-link" routerLink='/recipe-book' routerLinkActive="active" (click)="onRecipeBook()">Recipe Book</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">
         <a class="nav-link" routerLink='/shopping-list' routerLinkActive="active">Shopping List</a>

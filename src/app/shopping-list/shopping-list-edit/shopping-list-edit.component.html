@@ -2,21 +2,28 @@
     <div class="col-md-12">
         <form [formGroup]="editIngredientForm" (ngSubmit)="onSubmit()">
             <div class="row">
-                <div class="col-md-5 form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" formControlName="name">
-                    <span class="text-muted" *ngIf="!editIngredientForm.get('name').valid && editIngredientForm.get('name').touched && editIngredientForm.get('name').errors">
-                        <span *ngIf="editIngredientForm.get('name').errors['required']">Please enter an ingredient name.</span>
-                    </span>
-                </div>
                 <div class="col-md-2 form-group">
                     <label for="amount">Amount</label>
                     <input type="number" class="form-control" id="amount" formControlName="amount" min="1" max="100">
                     <span class="text-muted" *ngIf="!editIngredientForm.get('amount').valid && editIngredientForm.get('amount').touched && editIngredientForm.get('amount').errors">
                         <span *ngIf="editIngredientForm.get('amount').errors['required']">Please enter a numeric amount.</span>
-                        <span *ngIf="editIngredientForm.get('amount').errors['min'] || editIngredientForm.get('amount').errors['max']">Amount must be between 1 and 100 units.</span>
+                        <span *ngIf="editIngredientForm.get('amount').errors['min'] || editIngredientForm.get('amount').errors['max']">Amount must be between 1/10 and 100 units.</span>
                     </span>
                 </div>
+                <div class="col-md-3 form-group">
+                  <label for="name">Unit</label>
+                  <input type="text" class="form-control" id="unit" formControlName="unit">
+                  <span class="text-muted" *ngIf="!editIngredientForm.get('unit').valid && editIngredientForm.get('unit').touched && editIngredientForm.get('unit').errors">
+                      <span *ngIf="editIngredientForm.get('unit').errors['required']">Please enter a unit of measurement.</span>
+                  </span>
+              </div>
+              <div class="col-md-5 form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <span class="text-muted" *ngIf="!editIngredientForm.get('name').valid && editIngredientForm.get('name').touched && editIngredientForm.get('name').errors">
+                    <span *ngIf="editIngredientForm.get('name').errors['required']">Please enter an ingredient name.</span>
+                </span>
+              </div>
             </div>
             <div class="row">
                 <div class="col-md-12">

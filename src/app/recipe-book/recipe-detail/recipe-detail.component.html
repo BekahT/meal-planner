@@ -26,12 +26,29 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12 d-flex justify-content-center my-2">{{recipe.description}}</div>
-    <div class="col-md-12 d-flex justify-content-center">        
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
-                {{ ingredient.name }} - {{ ingredient.amount }}
-            </li>
-        </ul>
+</div>
+<div class="row">
+  <div class="col-md-12 d-flex justify-content-center my-2">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary" id="halveLabel">
+        <input type="radio" name="options" id="halve" autocomplete="off" (click)="onAdjustQuantities(.5)">Halve
+      </label>
+      <label class="btn btn-secondary" id="defaultLabel">
+        <input type="radio" name="options" id="default" autocomplete="off" checked (click)="onAdjustQuantities(1)">Default
+      </label>
+      <label class="btn btn-secondary" id="doubleLabel">
+        <input type="radio" name="options" id="double" autocomplete="off" (click)="onAdjustQuantities(2)">Double
+      </label>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 d-flex justify-content-center my-2">{{recipe.description}}</div>
+  <div class="col-md-12 d-flex justify-content-center">
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let ingredient of ingredients">
+              {{ ingredient.amount }} {{ ingredient.unit }} - {{ ingredient.name }}
+          </li>
+      </ul>
+  </div>
 </div>

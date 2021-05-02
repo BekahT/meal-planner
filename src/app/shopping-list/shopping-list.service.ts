@@ -14,9 +14,9 @@ export class ShoppingListService {
   constructor(private _snackBar: MatSnackBar) { }
 
   private ingredients: Ingredient[] = [
-    new Ingredient('bread', 2),
-    new Ingredient('egg', 3),
-    new Ingredient('cinnamon', 1)
+    new Ingredient('bread', 2, 'slices'),
+    new Ingredient('egg', 3, 'units'),
+    new Ingredient('cinnamon', 1, 'tbs')
   ];
 
   getIngredients(): Ingredient[] {

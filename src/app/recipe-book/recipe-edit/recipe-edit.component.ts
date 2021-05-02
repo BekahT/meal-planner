@@ -18,15 +18,14 @@ export class RecipeEditComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-
-    this.route.params.subscribe(
-      (params: Params) => {
+    this.route.params.subscribe((params: Params) => {
+      // If params has an id, a recipe is being edited. If not, a new recipe is being added.
+      if (params['id']) {
         this.id = +params['id'];
-        // If params has an id, a recipe is being edited. If not, a new recipe is being added.
-        this.editMode = params['id'] !== null;
-        this.initForm();
+        this.editMode = true;
       }
-    );
+      this.initForm();
+    });
   }
 
   onSubmit(): void {
@@ -47,8 +46,8 @@ export class RecipeEditComponent implements OnInit {
       new FormGroup({
         'name': new FormControl(null, Validators.required),
         'amount': new FormControl(null,
-          [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/), Validators.min(1), Validators.max(100)]
-        )
+          [Validators.required, Validators.min(.1), Validators.max(100)]),
+        'unit': new FormControl(null, Validators.required)
       })
     );
   }
@@ -78,8 +77,8 @@ export class RecipeEditComponent implements OnInit {
             new FormGroup({
               'name': new FormControl(ingredient.name, Validators.required),
               'amount': new FormControl(ingredient.amount,
-                [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/), Validators.min(1), Validators.max(100)]
-              )
+                [Validators.required, Validators.min(.1), Validators.max(100)]),
+              'unit': new FormControl(ingredient.unit, Validators.required)
             })
           );
         }
